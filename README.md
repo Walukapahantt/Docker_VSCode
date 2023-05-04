@@ -53,7 +53,7 @@ ENV USER="mirero" \
 RUN useradd -m ${USER} && echo "${USER}:${PASSWORD}" | chpasswd && adduser ${USER} sudo
 
 # 원하는 확장 설치
-# RUN code-server --install-extension ${EXTENSIONS}
+RUN code-server --install-extension ${EXTENSIONS}
 
 # 폴더 생성
 RUN mkdir "/home/${USER}/${WORKINGDIR}"
@@ -64,7 +64,7 @@ EXPOSE ${PORT}
 # code-server 시작
 ENTRYPOINT ["nohup", "code-server", "--bind-addr", "0.0.0.0:8080", "--auth", "password", "/home"]
 
-# nohup code-server --bind-addr 0.0.0.0:8080 --auth password --user-data-dir "/home/mirero/vscode/" "/home/mirero" &
+# nohup code-server --bind-addr 0.0.0.0:8080 --auth password "/home" &
 # docker build -t vscode-docker .
 # docker run -it --name vscode-container -p 8080:8080 vscode-docker
 ```
