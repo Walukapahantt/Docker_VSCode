@@ -97,3 +97,5 @@ docker run -it --name vscode-container -p 8080:8080 vscode-docker
 <img src="https://user-images.githubusercontent.com/66783849/236122610-ee1992db-73e6-49cc-923e-87f30581f3b6.png"/>  
 <img src="https://user-images.githubusercontent.com/66783849/236123909-619f4c79-cea9-49f0-866c-8304a5b78476.png"/>  
 
+다음과 같이 확장을 확인할 수 있습니다.  
+<img src="https://user-images.githubusercontent.com/66783849/236139196-a198a511-2b66-483b-a1f1-fd260e370021.png"/>  
