@@ -31,7 +31,8 @@ VSCode Server를 Docker로 돌립니다.
 
 ### Dockerfile 구성
 
-다음과 같이 dockerfile을 구성합니다.
+다음과 같이 dockerfile을 구성합니다.  
+이때, code-server를 백그라운드에서 실행하기 위해 `nohup` 명령어를 활용하였습니다.
 
 ```dockerfile
 FROM ubuntu:latest
@@ -92,5 +93,7 @@ docker build --progress=plain -t vscode-docker .
 ```bash
 docker run -it --name vscode-container -p 8080:8080 vscode-docker
 ```
-
+다음과 같이 접속 가능함을 확인할 수 있습니다.  
+<img src="https://user-images.githubusercontent.com/66783849/236122610-ee1992db-73e6-49cc-923e-87f30581f3b6.png"/>  
+<img src="https://user-images.githubusercontent.com/66783849/236122668-ca7af188-0804-47cd-9b06-3c5f098053a7.png"/>  
 
