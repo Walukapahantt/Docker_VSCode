@@ -38,26 +38,34 @@ FROM ubuntu:latest
 
 # 필요한 패키지 설치
 RUN apt-get update && \
-    apt-get install -y curl unzip sudo && \
+    apt-get install -y curl sudo && \
     curl -fsSL https://code-server.dev/install.sh | sh
 
 # code-server를 위한 환경 변수 설정
-ENV PASSWORD="your_password_here" \
-    USER="your_username_here" \
+ENV USER="mirero" \
+    PASSWORD="system" \
     PORT=8080 \
-    EXTENSIONS="your_extension_list_here"
+    EXTENSIONS="ms-python.python" \
+    WORKINGDIR="vscode"
 
 # 새로운 사용자 생성 및 비밀번호 설정
 RUN useradd -m ${USER} && echo "${USER}:${PASSWORD}" | chpasswd && adduser ${USER} sudo
 
 # 원하는 확장 설치
-RUN code-server --install-extension ${EXTENSIONS}
+# RUN code-server --install-extension ${EXTENSIONS}
+
+# 폴더 생성
+RUN mkdir "/home/${USER}/${WORKINGDIR}"
 
 # code-server를 위한 포트 노출
 EXPOSE ${PORT}
 
 # code-server 시작
-CMD ["code-server", "--bind-addr", "0.0.0.0:${PORT}", "--auth", "password", "--user-data-dir", "/home/${USER}/data", "/home/${USER}"]
+ENTRYPOINT ["nohup", "code-server", "--bind-addr", "0.0.0.0:8080", "--auth", "password", "--user-data-dir", "/home/mirero/vscode/", "/home/mirero", "&"]
+
+# nohup code-server --bind-addr 0.0.0.0:8080 --auth password --user-data-dir "/home/mirero/vscode/" "/home/mirero" &
+# docker build -t vscode-docker .
+# docker run -it --name vscode-container -p 8080:8080 vscode-docker
 ```
   
 설치하고자 하는 확장은 https://marketplace.visualstudio.com/items?itemName=ms-python.python 사이트에 들어가 `Unique Identifier`항목을 찾아 입력합니다.  
