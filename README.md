@@ -63,7 +63,7 @@ RUN code-server --install-extension "ms-python.python" --install-extension "ms-a
 # code-server 시작
 ENTRYPOINT ["nohup", "code-server", "--bind-addr", "0.0.0.0:8080", "--auth", "password", "/home"]
 
-# nohup code-server --bind-addr 0.0.0.0:8080 --auth password --user-data-dir "/home/mirero/vscode/" "/home/mirero" &
+# nohup code-server --bind-addr 0.0.0.0:8080 --auth password "/home/mirero" &
 # docker build -t vscode-docker .
 # docker run -it --name vscode-container -p 8080:8080 vscode-docker
 ```
