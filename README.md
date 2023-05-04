@@ -62,7 +62,7 @@ RUN mkdir "/home/${USER}/${WORKINGDIR}"
 EXPOSE ${PORT}
 
 # code-server 시작
-ENTRYPOINT ["nohup", "code-server", "--bind-addr", "0.0.0.0:8080", "--auth", "password", "--user-data-dir", "/home/mirero/vscode/", "/home/mirero", "&"]
+ENTRYPOINT ["nohup", "code-server", "--bind-addr", "0.0.0.0:8080", "--auth", "password", "/home"]
 
 # nohup code-server --bind-addr 0.0.0.0:8080 --auth password --user-data-dir "/home/mirero/vscode/" "/home/mirero" &
 # docker build -t vscode-docker .
@@ -95,5 +95,5 @@ docker run -it --name vscode-container -p 8080:8080 vscode-docker
 ```
 다음과 같이 접속 가능함을 확인할 수 있습니다.  
 <img src="https://user-images.githubusercontent.com/66783849/236122610-ee1992db-73e6-49cc-923e-87f30581f3b6.png"/>  
-<img src="https://user-images.githubusercontent.com/66783849/236122668-ca7af188-0804-47cd-9b06-3c5f098053a7.png"/>  
+<img src="https://user-images.githubusercontent.com/66783849/236123909-619f4c79-cea9-49f0-866c-8304a5b78476.png"/>  
 
