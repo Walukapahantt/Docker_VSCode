@@ -6,7 +6,7 @@
 VSCode Server를 Docker로 돌립니다.
 
 ### 목표
-- [ ] : 1. VSCode Server를 내포하는 Dockerfile을 구성합니다.
+- [x] : 1. VSCode Server를 내포하는 Dockerfile을 구성합니다.
 - [ ] : 2. 설정을 다르게 하여 구성합니다.
 
 ### 제작자
