@@ -41,8 +41,8 @@ RUN apt-get update && \
     apt-get install -y curl sudo
 
 # 새로운 사용자 생성 및 비밀번호 설정
-ENV USER="mirero" \
-    PASSWORD="system"
+ENV USER="user" \
+    PASSWORD="password"
 RUN useradd -m ${USER} && echo "${USER}:${PASSWORD}" | chpasswd && adduser ${USER} sudo
 
 # code-server 설치 및 세팅
