@@ -42,8 +42,8 @@ RUN apt-get update && \
     curl -fsSL https://code-server.dev/install.sh | sh
 
 # code-server를 위한 환경 변수 설정
-ENV USER="mirero" \
-    PASSWORD="system" \
+ENV USER="user" \
+    PASSWORD="password" \
     PORT=8080 \
     WORKINGDIR="vscode"
 
