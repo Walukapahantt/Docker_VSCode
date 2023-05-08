@@ -1,4 +1,4 @@
-문서정보 : 2023.04.27.-05.08. 작성, 작성자 [@SAgiKPJH](https://github.com/SAgiKPJH)
+문서정보 : 2023.04.27.-05.09. 작성, 작성자 [@SAgiKPJH](https://github.com/SAgiKPJH)
 
 <br>
 
@@ -7,6 +7,7 @@ VSCode Server를 Docker로 돌립니다.
 
 ### 목표
 - [x] : VSCode Server를 내포하는 Dockerfile을 구성합니다.
+- [x] : Docker Hub - Linux VSCode server
 
 ### 제작자
 [@SAgiKPJH](https://github.com/SAgiKPJH)
@@ -91,3 +92,10 @@ docker run -it --name vscode-container -p 8080:8080 vscode-docker
 
 다음과 같이 확장을 확인할 수 있습니다.  
 <img src="https://user-images.githubusercontent.com/66783849/236140752-2cd56f80-8d89-4c29-9261-8219288c767c.png"/>  
+
+<br><br>
+
+# Docker Hub - Linux VSCode server
+
+- docker hub에선 linux 기반 vscode server를 제공하는 image가 있다. https://hub.docker.com/r/linuxserver/code-server
+- 이 이미지를 run하여 docker server를 내포하는 docker를 실행할 수 있다.
