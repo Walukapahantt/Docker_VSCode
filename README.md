@@ -46,7 +46,6 @@ ENV USER="mirero" \
 RUN useradd -m ${USER} && echo "${USER}:${PASSWORD}" | chpasswd && adduser ${USER} sudo
 
 # code-server 설치 및 세팅
-ARG PORT=8080
 ENV WORKINGDIR="/home/${USER}/vscode"
 RUN curl -fsSL https://code-server.dev/install.sh | sh && \
     mkdir ${WORKINGDIR}
@@ -56,7 +55,6 @@ RUN code-server --install-extension "ms-python.python" \
                 --install-extension "ms-azuretools.vscode-docker"
 
 # code-server 시작
-EXPOSE ${PORT}
 ENTRYPOINT nohup code-server --bind-addr 0.0.0.0:8080 --auth password  ${WORKINGDIR}
 
 # docker build --no-cache -t vscode-docker .
