@@ -8,6 +8,7 @@ VSCode Server를 Docker로 돌립니다.
 ### 목표
 - [x] : VSCode Server를 내포하는 Dockerfile을 구성합니다.
 - [x] : Docker Hub - Linux VSCode server
+- [x] : 보다 높은 성능을 위한 내용
 
 ### 제작자
 [@SAgiKPJH](https://github.com/SAgiKPJH)
@@ -99,3 +100,42 @@ docker run -it --name vscode-container -p 8080:8080 vscode-docker
 
 - docker hub에선 linux 기반 vscode server를 제공하는 image가 있다. https://hub.docker.com/r/linuxserver/code-server
 - 이 이미지를 run하여 docker server를 내포하는 docker를 실행할 수 있다.
+
+<br><br>
+
+# 보다 높은 성능을 위한 내용
+
+- 보안성 및 이미지 용량을 줄이기 위해 다음과 같이 구성할 수 있습니다.  
+  - 보안을 위해 User로 실행하고 User로 접근합니다.
+  - 불필요한 파일을 삭제하여 용량을 최소화 합니다.
+  ```dockerfile
+  # Base Image
+  FROM ubuntu:latest
+  
+  # 필요한 패키지 설치, cache 비우기
+  RUN apt-get update && \
+      apt-get install -y curl sudo && \
+      apt-get clean && \
+      rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+  
+  # 새로운 사용자 생성 및 비밀번호 설정
+  ENV USER="user" \
+      PASSWORD="password"
+  RUN useradd -m ${USER} && echo "${USER}:${PASSWORD}" | chpasswd && adduser ${USER} sudo && \
+      sed -i "/^root/ c\root:!:18291:0:99999:7:::" /etc/shadow
+  
+  # code-server 설치 및 세팅
+  ENV WORKINGDIR="/home/${USER}/vscode"
+  RUN curl -fsSL https://code-server.dev/install.sh | sh && \
+      mkdir ${WORKINGDIR} && \
+      su ${USER} -c "code-server --install-extension ms-python.python \
+                                 --install-extension ms-azuretools.vscode-docker" && \
+      rm -rf ${WORKINGDIR}/.local ${WORKINGDIR}/.cache
+  
+  # code-server 시작
+  USER ${USER}
+  ENTRYPOINT nohup code-server --bind-addr 0.0.0.0:8080 --auth password  ${WORKINGDIR}
+  
+  # docker build -t vscode-docker .
+  # docker run -it --name vscode-container -p 8080:8080 vscode-docker
+  ```
